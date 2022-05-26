@@ -3,7 +3,9 @@ import { calculaMod } from './calcula-mod'
 import { identificarReferencia } from './identifica-referencia'
 import { calcularDigitoVerificadorCodigoBarras } from './calcular-digito-verificador-codigo-barras'
 
-    export function validarCodigoComDV(codigo: string, tipoCodigo: string) {
+class ValidaDigitoVerficador {
+
+    public validarCodigoComDV = (codigo: string, tipoCodigo: string) => {
         codigo = codigo.replace(/[^0-9]/g, '');
         
         let tipoBoleto;
@@ -79,3 +81,6 @@ import { calcularDigitoVerificadorCodigoBarras } from './calcular-digito-verific
         }
         return codigo === resultado;
     }
+}
+
+export const validaDigitoVerficador = new ValidaDigitoVerficador()

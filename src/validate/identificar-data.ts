@@ -1,7 +1,7 @@
 import { identificaTipoBoleto } from "./identifica-tipo-boleto";
 
     export function identificarData(codigo: string, tipoCodigo: string) {
-        //var moment = require('moment-timezone'); moment("1997-10-07 20:54:59.000Z", "UTC");
+        
         var moment = require('moment');
         codigo = codigo.replace(/[^0-9]/g, '');
         const tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);

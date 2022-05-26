@@ -1,15 +1,14 @@
 import express from 'express'
-import { utils } from '../../src/utils/Utils'
+
 import { identificarTipoCodigo } from '../services/Identificador-Codigo'
 import { identificaTipoBoleto } from '../validate/identifica-tipo-boleto'
-import { validarCodigoComDV } from '../validate/validar-digito-verificador'
+
 import { Retorno } from '../types/types'
 import { linhaDigitavelCodigoBarras } from '../validate/linha-digitavel-codigo-barras'
 import { codigoBarrasLinhaDigitavel } from '../validate/codigo-barras-linha-digitavel'
 import { identificaValor } from '../validate/identifica-valor'
 import { identificarData } from '../validate/identificar-data'
-
-
+import { validaDigitoVerficador } from '../validate/validar-digito-verificador'
 
 const boletoRouter = express.Router()
 
@@ -52,7 +51,7 @@ boletoRouter.get('/:id', (req, res) => {
         return res.json(retorno);
     }
 
-    if (!validarCodigoComDV(codigo, tipoCodigo)) {
+    if (!validaDigitoVerficador.validarCodigoComDV(codigo, tipoCodigo)) {
         retorno.sucesso = false;
         retorno.codigoInput = codigo;
         retorno.mensagem = 'A validação do dígito verificador falhou. Tem certeza que inseriu a numeração correta?';
