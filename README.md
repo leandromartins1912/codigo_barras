@@ -10,7 +10,7 @@ No diretório do projeto, você pode executar:
 
 ## Aplicação Local
 
-<h3>O parâmetro informado deve ser um número.</h3>
+<h3>O parâmetro informado deve ser um código de barras.</h3>
 
 Executa o aplicativo no modo de desenvolvimento.\
 Abra http://localhost:4000/boleto/parâmetro. No Postman/insomnia.
@@ -22,3 +22,11 @@ No diretório do projeto executar o comando npm test ou yarn test para execuçã
 ## Docker <img height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" />
 
 Para rodar a imagem docker, no diretório aplique o comando docker-compose up.
+
+## Heroku
+
+### Parâmentro - Código de Barras
+
+Api pode ser testada no link https://validador-codigo-barras.herokuapp.com/boleto/parâmetro
+
+<img align="center" alt="Heroku" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg" />
