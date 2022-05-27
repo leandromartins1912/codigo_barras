@@ -32,6 +32,7 @@ Api pode ser testada no link https://validador-codigo-barras.herokuapp.com/bolet
 response
 
 status:200
+
 {
     "codigoBarras": "10494899100000545018370397031115040003306114",
     "valor": 545.01,
