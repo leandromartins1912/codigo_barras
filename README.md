@@ -25,7 +25,7 @@ Para rodar a imagem docker, no diretório aplique o comando docker-compose up.
 
 ## Heroku
 
-### Parâmentro - Código de Barras
+### Parâmentro - Código de Barras <img align="center" alt="Heroku" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg" />
 
 Api pode ser testada no link https://validador-codigo-barras.herokuapp.com/boleto/parâmetro
 
@@ -38,4 +38,4 @@ status:200
     "vencimento": "2022-05-20"
 }
 
-<img align="center" alt="Heroku" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg" />
+
