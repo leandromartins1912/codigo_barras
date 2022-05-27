@@ -1,7 +1,7 @@
 # Iniciando o Projeto
 Este Projeto foi desenvolvido com nodejs e ts. <img height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-plain.svg" />
 
-## Scripts Disponíveis
+## Scripts
 
 No diretório do projeto, você pode executar:
 
