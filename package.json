@@ -8,6 +8,7 @@
     "start": "ts-node ./dist/server.js",
     "test": "jest"
   },
+  "stack": "heroku-20",
   "license": "MIT",
   "dependencies": {
     "@types/cors": "^2.8.12",
