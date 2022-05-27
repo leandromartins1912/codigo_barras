@@ -18,16 +18,10 @@ boletoRouter.get('/', (req, res) => {
 })
 
 boletoRouter.get('/:id', (req, res) => {
-    var retorno: Retorno = {
-        sucesso: false,
-        codigoInput: '',
-        mensagem: '',
-        tipoCodigoInput: '',
-        tipoBoleto: '',
-        codigoBarras: '',
-        linhaDigitavel: '',
-        vencimento: '',
-        valor: 0
+    var retorno: Retorno = { 
+        codigoBarras: '',       
+        valor: 0,
+        vencimento: ''
     };
 
 
@@ -59,31 +53,21 @@ boletoRouter.get('/:id', (req, res) => {
         res.status(400)
         return res.json(retorno)
     } else {
-        retorno.sucesso = true;
-        retorno.codigoInput = codigo;
-        retorno.mensagem = 'Boleto válido';
-        res.status(200)
-
         switch (tipoCodigo) {
             case 'LINHA_DIGITAVEL':
-                retorno.tipoCodigoInput = 'LINHA_DIGITAVEL';
-                retorno.tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo)!;
                 retorno.codigoBarras = linhaDigitavelCodigoBarras.linhaDigitavel2CodBarras(codigo);
-                retorno.linhaDigitavel = codigo;
-                retorno.vencimento = identificarData(codigo, 'LINHA_DIGITAVEL').format('YYYY-MM-DD');
                 retorno.valor = identificaValor.identificarValor(codigo, 'LINHA_DIGITAVEL');
+                retorno.vencimento = identificarData(codigo, 'LINHA_DIGITAVEL').format('YYYY-MM-DD');
                 break;
-            case 'CODIGO_DE_BARRAS':
-                retorno.tipoCodigoInput = 'CODIGO_DE_BARRAS';
-                retorno.tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo)!;
-                retorno.codigoBarras = codigo;
-                retorno.linhaDigitavel = codigoBarrasLinhaDigitavel.codBarras2LinhaDigitavel(codigo, false);
-                retorno.vencimento = identificarData(codigo, 'CODIGO_DE_BARRAS').format('YYYY-MM-DD');
+            case 'CODIGO_DE_BARRAS':               
+                retorno.codigoBarras = codigo;               
                 retorno.valor = identificaValor.identificarValor(codigo, 'CODIGO_DE_BARRAS');
+                retorno.vencimento = identificarData(codigo, 'CODIGO_DE_BARRAS').format('YYYY-MM-DD');
                 break;
             default:
                 break;
         }
+        res.status(200)
     }
     return res.json(retorno)
 })
