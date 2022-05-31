@@ -8,12 +8,11 @@ class ValidaDigitoVerficador {
     public validarCodigoComDV = (codigo: string, tipoCodigo: string) => {
         codigo = codigo.replace(/[^0-9]/g, '');
 
-        let tipoBoleto;
-        let resultado;
+        var resultado;
+        var tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);
+        const identificacaoValorRealOuReferencia = identificarReferencia.identificarReferencia(codigo);
 
         if (tipoCodigo === 'LINHA_DIGITAVEL') {
-            tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);
-
             if (tipoBoleto == 'BANCO' || tipoBoleto == 'CARTAO_DE_CREDITO') {
                 const bloco1 = codigo.substr(0, 9) + calculaMod.calculaMod10(codigo.substr(0, 9));
                 const bloco2 = codigo.substr(10, 10) + calculaMod.calculaMod10(codigo.substr(10, 10));
@@ -23,7 +22,6 @@ class ValidaDigitoVerficador {
 
                 resultado = (bloco1 + bloco2 + bloco3 + bloco4 + bloco5).toString();
             } else {
-                const identificacaoValorRealOuReferencia = identificarReferencia.identificarReferencia(codigo);
 
                 if (identificacaoValorRealOuReferencia != null) {
                     var bloco1: string = '';
@@ -57,15 +55,12 @@ class ValidaDigitoVerficador {
                     resultado = bloco1 + bloco2 + bloco3 + bloco4;
                 }
             }
-        } else if (tipoCodigo === 'CODIGO_DE_BARRAS') {
-            tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);
+        } else if (tipoCodigo === 'CODIGO_DE_BARRAS') {            
 
             if (tipoBoleto == 'BANCO' || tipoBoleto == 'CARTAO_DE_CREDITO') {
                 const DV = calculaDigitoVerificador.calculaDVCodBarras(codigo, 4, 11);
                 resultado = codigo.substr(0, 4) + DV + codigo.substr(5);
             } else {
-                const identificacaoValorRealOuReferencia = identificarReferencia.identificarReferencia(codigo);
-
                 if (identificacaoValorRealOuReferencia != null) {
                     resultado = codigo.split('');
                     resultado.splice(3, 1);

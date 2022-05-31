@@ -23,13 +23,14 @@ boletoRouter.get('/:id', (req, res) => {
     };
 
     var codigo = req.params.id.replace(/[^0-9]/g, '');
-    let tipoCodigo = identificarTipoCodigo.identificarTipoCodigo(codigo);
-
+    
     if (codigo.length == 36) {
         codigo = codigo + '00000000000';
     } else if (codigo.length == 46) {
         codigo = codigo + '0';
     }
+    
+    let tipoCodigo = identificarTipoCodigo.identificarTipoCodigo(codigo);
 
     if (codigo.length != 44 && codigo.length != 46 && codigo.length != 47 && codigo.length != 48) {
         retorno.sucesso = false;

@@ -171,6 +171,15 @@ describe("Identifica o fator da data de vencimento do boleto", () => {
       });
     });
 
+    describe("codigo Numeração do boleto", () => {
+      it("Tipo: CARTAO_DE_CREDITO", () => {
+        const result = identificaTipoBoleto.identificarTipoBoleto(
+          "34191759344453876252550040380003100000000000000"
+        );
+        expect(result).toEqual('CARTAO_DE_CREDITO');
+      });
+    });
+
   });
 
   describe("Função auxiliar para remover os zeros à esquerda dos valores detectados no código inserido", () => {

@@ -6,33 +6,32 @@ class IdentificarReferencia {
 
         if (typeof codigo !== 'string') throw new TypeError('Insira uma string válida!');
 
-        switch (referencia) {
-            case '6':
-                return {
-                    mod: 10,
-                    efetivo: true
-                };
-                break;
-            case '7':
-                return {
-                    mod: 10,
-                    efetivo: false
-                };
-                break;
-            case '8':
-                return {
-                    mod: 11,
-                    efetivo: true
-                };
-                break;
-            case '9':
-                return {
-                    mod: 11,
-                    efetivo: false
-                };
-                break;
-            default:
-                break;
+        if (referencia == '6') {
+            return {
+                mod: 10,
+                efetivo: true
+            }
+        }
+
+        if (referencia == '7') {
+            return {
+                mod: 10,
+                efetivo: false
+            }
+        }
+
+        if (referencia == '8') {
+            return {
+                mod: 11,
+                efetivo: true
+            }
+        }
+
+        if (referencia == '9') {
+            return {
+                mod: 11,
+                efetivo: false
+            }
         }
     }
 }

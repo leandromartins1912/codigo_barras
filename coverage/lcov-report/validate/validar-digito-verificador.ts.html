@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.7% </span>
+                <span class="strong">53.84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>29/54</span>
+                <span class='fraction'>28/52</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.7% </span>
+                <span class="strong">53.84% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>29/54</span>
+                <span class='fraction'>28/52</span>
             </div>
         
             
@@ -142,12 +142,7 @@
 <a name='L77'></a><a href='#L77'>77</a>
 <a name='L78'></a><a href='#L78'>78</a>
 <a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -158,12 +153,11 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -172,7 +166,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -207,13 +200,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -241,12 +231,11 @@ class ValidaDigitoVerficador {
     public validarCodigoComDV = (codigo: string, tipoCodigo: string) =&gt; {
         codigo = codigo.replace(/[^0-9]/g, '');
 &nbsp;
-        let tipoBoleto;
-        let resultado;
+        var resultado;
+        var tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);
+        const identificacaoValorRealOuReferencia = identificarReferencia.identificarReferencia(codigo);
 &nbsp;
         if (tipoCodigo === 'LINHA_DIGITAVEL') {
-            tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);
-&nbsp;
             if (tipoBoleto == 'BANCO' || <span class="branch-1 cbranch-no" title="branch not covered" >tipoBoleto == 'CARTAO_DE_CREDITO')</span> {
                 const bloco1 = codigo.substr(0, 9) + calculaMod.calculaMod10(codigo.substr(0, 9));
                 const bloco2 = codigo.substr(10, 10) + calculaMod.calculaMod10(codigo.substr(10, 10));
@@ -256,7 +245,6 @@ class ValidaDigitoVerficador {
 &nbsp;
                 resultado = (bloco1 + bloco2 + bloco3 + bloco4 + bloco5).toString();
             } else <span class="missing-if-branch" title="else path not taken" >E</span>{
-                const identificacaoValorRealOuReferencia = <span class="cstat-no" title="statement not covered" >identificarReferencia.identificarReferencia(codigo);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                <span class="missing-if-branch" title="if path not taken" >I</span>if (identificacaoValorRealOuReferencia != null) {</span>
                     var bloco1: string = <span class="cstat-no" title="statement not covered" >'';</span>
@@ -290,15 +278,12 @@ class ValidaDigitoVerficador {
 <span class="cstat-no" title="statement not covered" >                    resultado = bloco1 + bloco2 + bloco3 + bloco4;</span>
                 }
             }
-        } else if (tipoCodigo === 'CODIGO_DE_BARRAS') {
-            tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);
+        } else if (tipoCodigo === 'CODIGO_DE_BARRAS') {            
 &nbsp;
             <span class="missing-if-branch" title="if path not taken" >I</span>if (tipoBoleto == 'BANCO' || tipoBoleto == 'CARTAO_DE_CREDITO') {
                 const DV = <span class="cstat-no" title="statement not covered" >calculaDigitoVerificador.calculaDVCodBarras(codigo, 4, 11);</span>
 <span class="cstat-no" title="statement not covered" >                resultado = codigo.substr(0, 4) + DV + codigo.substr(5);</span>
             } else {
-                const identificacaoValorRealOuReferencia = identificarReferencia.identificarReferencia(codigo);
-&nbsp;
                 if (identificacaoValorRealOuReferencia != null) {
                     resultado = codigo.split('');
                     resultado.splice(3, 1);
@@ -322,7 +307,7 @@ export const validaDigitoVerficador = new ValidaDigitoVerficador()</pre></td></t
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon May 30 2022 22:37:27 GMT-0300 (GMT-03:00)
+                at Tue May 31 2022 14:26:26 GMT-0300 (GMT-03:00)
             </div>
         <script src="../prettify.js"></script>
         <script>
