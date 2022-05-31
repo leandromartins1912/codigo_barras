@@ -1,7 +1,7 @@
 # Iniciando o Projeto
 Este Projeto foi desenvolvido com nodejs e ts. <img height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-plain.svg" />
 
-## Scripts Disponíveis
+## Scripts
 
 No diretório do projeto, você pode executar:
 
@@ -25,8 +25,18 @@ Para rodar a imagem docker, no diretório aplique o comando docker-compose up.
 
 ## Heroku
 
-### Parâmentro - Código de Barras
+### Parâmentro - Código de Barras <img align="center" alt="Heroku" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg" />
 
 Api pode ser testada no link https://validador-codigo-barras.herokuapp.com/boleto/parâmetro
 
-<img align="center" alt="Heroku" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg" />
+response
+
+status:200
+
+{
+    "codigoBarras": "10494899100000545018370397031115040003306114",
+    "valor": 545.01,
+    "vencimento": "2022-05-20"
+}
+
+
