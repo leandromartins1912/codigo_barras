@@ -21,7 +21,7 @@ No diretório do projeto executar o comando npm test ou yarn test para execuçã
 
 ## Docker <img height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" />
 
-Para rodar a imagem docker, no diretório aplique o comando docker-compose up.
+Para rodar a imagem docker, no diretório aplique o comando docker compose up.
 
 ## Heroku
 
