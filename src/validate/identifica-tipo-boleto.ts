@@ -16,7 +16,7 @@ class IdentificaTipoBoleto {
             } else if (codigo.substr(1, 1) == '4') {
                 return 'CONVENIO_TELECOMUNICACOES';
             } else if (codigo.substr(1, 1) == '5') {
-                return 'ARRECADACAO_ORGAOS_GOVERNAMENTAIS';
+                return 'ORGAOS_GOVERNAMENTAIS';
             } else if (codigo.substr(1, 1) == '6' || codigo.substr(1, 1) == '9') {
                 return 'OUTROS';
             } else if (codigo.substr(1, 1) == '7') {

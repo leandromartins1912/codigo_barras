@@ -11,7 +11,7 @@ class IdentificaValor{
         let valorFinal: any ;
     
         if (tipoCodigo == 'CODIGO_DE_BARRAS') {
-            if (tipoBoleto == 'BANCO' || tipoBoleto == 'CARTAO_DE_CREDITO') {
+            if (tipoBoleto == 'BANCO' ) {
                 valorBoleto = codigo.substr(9, 10);
                 valorFinal = valorBoleto.substr(0, 8) + '.' + valorBoleto.substr(8, 2);
     
@@ -25,7 +25,7 @@ class IdentificaValor{
             }
     
         } else if (tipoCodigo == 'LINHA_DIGITAVEL') {
-            if (tipoBoleto == 'BANCO' || tipoBoleto == 'CARTAO_DE_CREDITO') {
+            if (tipoBoleto == 'BANCO' ) {
                 valorBoleto = codigo.substr(37);
                 valorFinal = valorBoleto.substr(0, 8) + '.' + valorBoleto.substr(8, 2);
     

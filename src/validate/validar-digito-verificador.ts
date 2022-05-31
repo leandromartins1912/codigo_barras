@@ -1,18 +1,18 @@
 import { identificaTipoBoleto } from './identifica-tipo-boleto'
 import { calculaMod } from './calcula-mod'
 import { identificarReferencia } from './identifica-referencia'
-import { calcularDigitoVerificadorCodigoBarras } from './calcular-digito-verificador-codigo-barras'
+import { calculaDigitoVerificador } from '../validate/calcula-digito-verificador-codigo'
 
 class ValidaDigitoVerficador {
 
     public validarCodigoComDV = (codigo: string, tipoCodigo: string) => {
         codigo = codigo.replace(/[^0-9]/g, '');
-        
+
         let tipoBoleto;
         let resultado;
 
         if (tipoCodigo === 'LINHA_DIGITAVEL') {
-             tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);
+            tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);
 
             if (tipoBoleto == 'BANCO' || tipoBoleto == 'CARTAO_DE_CREDITO') {
                 const bloco1 = codigo.substr(0, 9) + calculaMod.calculaMod10(codigo.substr(0, 9));
@@ -21,22 +21,21 @@ class ValidaDigitoVerficador {
                 const bloco4 = codigo.substr(32, 1);
                 const bloco5 = codigo.substr(33);
 
-                 resultado = (bloco1 + bloco2 + bloco3 + bloco4 + bloco5).toString();
+                resultado = (bloco1 + bloco2 + bloco3 + bloco4 + bloco5).toString();
             } else {
                 const identificacaoValorRealOuReferencia = identificarReferencia.identificarReferencia(codigo);
-
 
                 if (identificacaoValorRealOuReferencia != null) {
                     var bloco1: string = '';
                     var bloco2: string = '';
                     var bloco3: string = '';
                     var bloco4: string = '';
-                    if (identificacaoValorRealOuReferencia.mod == 10) {
+                    if (identificacaoValorRealOuReferencia.mod === 10) {
                         bloco1 = codigo.substr(0, 11) + calculaMod.calculaMod10(codigo.substr(0, 11));
                         bloco2 = codigo.substr(12, 11) + calculaMod.calculaMod10(codigo.substr(12, 11));
                         bloco3 = codigo.substr(24, 11) + calculaMod.calculaMod10(codigo.substr(24, 11));
                         bloco4 = codigo.substr(36, 11) + calculaMod.calculaMod10(codigo.substr(36, 11));
-                    } else if (identificacaoValorRealOuReferencia.mod == 11) {
+                    } else if (identificacaoValorRealOuReferencia.mod === 11) {
                         bloco1 = codigo.substr(0, 11);
                         bloco2 = codigo.substr(12, 11);
                         bloco3 = codigo.substr(24, 11);
@@ -57,14 +56,12 @@ class ValidaDigitoVerficador {
 
                     resultado = bloco1 + bloco2 + bloco3 + bloco4;
                 }
-
-
             }
         } else if (tipoCodigo === 'CODIGO_DE_BARRAS') {
             tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);
 
             if (tipoBoleto == 'BANCO' || tipoBoleto == 'CARTAO_DE_CREDITO') {
-                const DV = calcularDigitoVerificadorCodigoBarras.calculaDVCodBarras(codigo, 4, 11);
+                const DV = calculaDigitoVerificador.calculaDVCodBarras(codigo, 4, 11);
                 resultado = codigo.substr(0, 4) + DV + codigo.substr(5);
             } else {
                 const identificacaoValorRealOuReferencia = identificarReferencia.identificarReferencia(codigo);
@@ -74,9 +71,11 @@ class ValidaDigitoVerficador {
                     resultado.splice(3, 1);
                     resultado = resultado.join('');
 
-                    const DV = calcularDigitoVerificadorCodigoBarras.calculaDVCodBarras(codigo, 3, identificacaoValorRealOuReferencia.mod);
+                    const DV = calculaDigitoVerificador.calculaDVCodBarras(codigo, 3, identificacaoValorRealOuReferencia.mod);
                     resultado = resultado.substr(0, 3) + DV + resultado.substr(3);
+
                 }
+
             }
         }
         return codigo === resultado;

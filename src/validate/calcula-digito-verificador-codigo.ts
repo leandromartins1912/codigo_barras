@@ -1,20 +1,19 @@
-import { calculaMod } from './calcula-mod'
+import { calculaMod } from '../validate/calcula-mod'
 
-class CalcularDigitoVerificadorCodigoBarras {
+class CalculaDigitoVerificador {
     public calculaDVCodBarras = (codigo: any, posicaoCodigo: number, mod: number) => {
         codigo = codigo.replace(/[^0-9]/g, '');
 
         codigo = codigo.split('');
-        codigo.slice(posicaoCodigo, 1);
-        codigo = codigo.join('');       
+        codigo.splice(posicaoCodigo, 1);
+        codigo = codigo.join('');
 
         if (mod === 10) {
             return calculaMod.calculaMod10(codigo);
         } else if (mod === 11) {
             return calculaMod.calculaMod11(codigo);
         }
-
     }
 }
 
-export const calcularDigitoVerificadorCodigoBarras = new CalcularDigitoVerificadorCodigoBarras()
+export const calculaDigitoVerificador = new CalculaDigitoVerificador()

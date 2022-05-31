@@ -1,5 +1,5 @@
 class SubstringReplace{
-   public substringReplace = (str:string, repl:any, inicio:any, tamanho:any) => {
+   public substringReplace = (str:string, repl:any, inicio:number, tamanho:number) => {
         if (inicio < 0) {
             inicio = inicio + str.length;
         }

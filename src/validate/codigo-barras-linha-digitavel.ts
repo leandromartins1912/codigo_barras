@@ -3,14 +3,14 @@ import { identificarReferencia } from "./identifica-referencia";
 import { identificaTipoBoleto } from "./identifica-tipo-boleto";
 
 class CodigoBarrasLinhaDigitavel{
-    public codBarras2LinhaDigitavel = (codigo:string, formatada:boolean) => {
+    public codigoBarras2LinhaDigitavel = (codigo:string, formatada:boolean) => {
         codigo = codigo.replace(/[^0-9]/g, '');
     
         const tipoBoleto = identificaTipoBoleto.identificarTipoBoleto(codigo);
     
         let resultado = '';
     
-        if (tipoBoleto == 'BANCO' || tipoBoleto == 'CARTAO_DE_CREDITO') {
+        if (tipoBoleto == 'BANCO') {
             const novaLinha = codigo.substr(0, 4) + codigo.substr(19, 25) + codigo.substr(4, 1) + codigo.substr(5, 14);
     
             const bloco1 = novaLinha.substr(0, 9) + calculaMod.calculaMod10(novaLinha.substr(0, 9));

@@ -1,11 +1,9 @@
 import express from 'express'
 
 import { identificarTipoCodigo } from '../services/Identificador-Codigo'
-import { identificaTipoBoleto } from '../validate/identifica-tipo-boleto'
 
 import { Retorno } from '../types/types'
 import { linhaDigitavelCodigoBarras } from '../validate/linha-digitavel-codigo-barras'
-import { codigoBarrasLinhaDigitavel } from '../validate/codigo-barras-linha-digitavel'
 import { identificaValor } from '../validate/identifica-valor'
 import { identificarData } from '../validate/identificar-data'
 import { validaDigitoVerficador } from '../validate/validar-digito-verificador'
@@ -24,13 +22,16 @@ boletoRouter.get('/:id', (req, res) => {
         vencimento: ''
     };
 
-
     var codigo = req.params.id.replace(/[^0-9]/g, '');
     let tipoCodigo = identificarTipoCodigo.identificarTipoCodigo(codigo);
 
-    codigo.length == 36 ? codigo = codigo + '00000000000' : codigo = codigo + '0';
+    if (codigo.length == 36) {
+        codigo = codigo + '00000000000';
+    } else if (codigo.length == 46) {
+        codigo = codigo + '0';
+    }
 
-    if (![44, 46, 47, 48].includes(codigo.length)) {
+    if (codigo.length != 44 && codigo.length != 46 && codigo.length != 47 && codigo.length != 48) {
         retorno.sucesso = false;
         retorno.codigoInput = codigo;
         retorno.mensagem = 'Por favor insira uma numeração válida. Códigos de barras SEMPRE devem ter 44 caracteres numéricos. Linhas digitáveis podem possuir 46 (boletos de cartão de crédito), 47 (boletos bancários/cobrança) ou 48 (contas convênio/arrecadação) caracteres numéricos. Qualquer caractere não numérico será desconsiderado.';
@@ -38,7 +39,7 @@ boletoRouter.get('/:id', (req, res) => {
         return res.json(retorno);
     }
 
-    if (codigo.substr(0, 1) == '8' && codigo.length == 46 || codigo.length == 47) {
+    if (codigo.substr(0, 1) == '8' && (codigo.length === 46 || codigo.length === 47)) {
         retorno.sucesso = false;
         retorno.codigoInput = codigo;
         retorno.mensagem = 'Este tipo de boleto deve possuir um código de barras 44 caracteres numéricos. Ou linha digitável de 48 caracteres numéricos.';
@@ -57,12 +58,12 @@ boletoRouter.get('/:id', (req, res) => {
             case 'LINHA_DIGITAVEL':
                 retorno.codigoBarras = linhaDigitavelCodigoBarras.linhaDigitavel2CodBarras(codigo);
                 retorno.valor = identificaValor.identificarValor(codigo, 'LINHA_DIGITAVEL');
-                retorno.vencimento = identificarData(codigo, 'LINHA_DIGITAVEL').format('YYYY-MM-DD');
+                retorno.vencimento = identificarData(codigo, 'LINHA_DIGITAVEL');
                 break;
             case 'CODIGO_DE_BARRAS':               
                 retorno.codigoBarras = codigo;               
                 retorno.valor = identificaValor.identificarValor(codigo, 'CODIGO_DE_BARRAS');
-                retorno.vencimento = identificarData(codigo, 'CODIGO_DE_BARRAS').format('YYYY-MM-DD');
+                retorno.vencimento = identificarData(codigo, 'CODIGO_DE_BARRAS');
                 break;
             default:
                 break;

@@ -5,4 +5,4 @@ npm-debug.log
 .DS_Store
 package-lock.json
 yarn.lock
-.vscode/
+.vscode/"# Coverage reports\ncoverage\ncoverage/\ncoverage/*\n" 

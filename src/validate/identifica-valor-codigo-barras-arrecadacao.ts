@@ -7,7 +7,7 @@ class IdentificaValorCodigoBarrasArreacadacao {
 
         const isValorEfetivo = identificarReferencia.identificarReferencia(codigo)!.efetivo;
 
-        let valorBoleto:any = '';
+        let valorBoleto: any = '';
         let valorFinal;
 
         if (isValorEfetivo) {

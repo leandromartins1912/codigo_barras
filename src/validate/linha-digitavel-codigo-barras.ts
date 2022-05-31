@@ -8,7 +8,7 @@ class LinhaDigitavelCodigoBarras{
     
         let resultado = '';
     
-        if (tipoBoleto == 'BANCO' || tipoBoleto == 'CARTAO_DE_CREDITO') {
+        if (tipoBoleto == 'BANCO') {
             resultado = codigo.substr(0, 4) +
                 codigo.substr(32, 1) +
                 codigo.substr(33, 14) +
