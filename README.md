@@ -23,11 +23,17 @@ No diretório do projeto executar o comando npm test ou yarn test para execuçã
 
 Para rodar a imagem docker, no diretório aplique o comando docker compose up.
 
-## Heroku
+## Heroku | Amazon 
 
 ### Parâmentro - Código de Barras <img align="center" alt="Heroku" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg" />
 
-Api pode ser testada no link [https://validador-codigo-barras.herokuapp.com/boleto/](https://validador-codigo-barras.herokuapp.com/boleto/)parâmetro
+Api pode ser testada nos links abaixo:
+
+#Heroku
+[https://validador-codigo-barras.herokuapp.com/boleto/](https://validador-codigo-barras.herokuapp.com/boleto/)parâmetro 
+
+#Amazon
+http://ec2-3-137-183-10.us-east-2.compute.amazonaws.com/boleto/parâmetro 
 
 response
 
